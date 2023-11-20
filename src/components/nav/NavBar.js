@@ -9,7 +9,6 @@ export const NavBar = ({ token, setToken }) => {
   const hamburger = useRef();
 
   const showMobileNavbar = () => {
-    debugger;
     hamburger.current.classList.toggle("is-active");
     navbar.current.classList.toggle("is-active");
   };
@@ -46,11 +45,17 @@ export const NavBar = ({ token, setToken }) => {
         <div className="navbar-start">
           {token ? (
             <Link to="/" className="navbar-item">
-              Posts
+              All Posts
             </Link>
           ) : (
             ""
           )}
+        </div>
+
+        <div>
+          <Link to="/my_posts" className="navbar-item">
+            My Posts
+          </Link>
         </div>
 
         <div className="navbar-end">
