@@ -10,6 +10,8 @@ export const CategoryForm = ({token}) => {
     const [category, updateCategoryProps] = useState(initialCategoryState)
     const navigate = useNavigate()
 
+
+    
     const createCategory = async (evt) => {
         evt.preventDefault()
 
