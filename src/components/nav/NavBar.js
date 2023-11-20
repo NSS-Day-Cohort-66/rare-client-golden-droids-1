@@ -9,7 +9,6 @@ export const NavBar = ({ token, setToken }) => {
   const hamburger = useRef();
 
   const showMobileNavbar = () => {
-    debugger;
     hamburger.current.classList.toggle("is-active");
     navbar.current.classList.toggle("is-active");
   };
