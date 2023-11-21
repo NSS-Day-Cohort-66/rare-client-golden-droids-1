@@ -64,7 +64,7 @@ export const TagList = ({ token, staff }) => {
     <article>
       <h2>Tags</h2>
       <div className="tags--container">{displayTags()}</div>
-      <Link to="/create-tag" className="create-tag-button">
+      <Link to="/tags/create" className="create-tag-button">
         Create New Tag
       </Link>
     </article>

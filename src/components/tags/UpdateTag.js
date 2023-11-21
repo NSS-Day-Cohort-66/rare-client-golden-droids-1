@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editTag, getTagById } from "../../managers/TagManager";
+import "./Tag.css";
 
-export const UpdateTag = ({ token, staff }) => {
+export const UpdateTag = ({ token }) => {
   const [currentTag, setCurrentTag] = useState({});
   const { tagId } = useParams();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getTagById(tagId).then((tagObj) => {
+    getTagById(token, tagId).then((tagObj) => {
       setCurrentTag(tagObj);
     });
-  }, [tagId]);
+  }, [token, tagId]);
 
   const changeTagState = (e) => {
     setCurrentTag({
@@ -51,11 +52,21 @@ export const UpdateTag = ({ token, staff }) => {
             />
           </div>
         </fieldset>
-        <div>
-          <button type="submit">Save</button>
-        </div>
-        <div>
-          <button type="submit">Cancel</button>
+        <div className="buttons--container">
+          <div className="button--container">
+            <button type="submit" onClick={handleSave}>
+              Save
+            </button>
+          </div>
+          <div className="button--container">
+            <button
+              onClick={() => {
+                navigate(`/tags/all`);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </form>
     );

@@ -39,12 +39,9 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
               path="all"
               element={<TagList token={token} staff={staff} />}
             />
-            <Route
-              path="update/:tagId"
-              element={<UpdateTag token={token} staff={staff} />}
-            />
+            <Route path="update/:tagId" element={<UpdateTag token={token} />} />
+            <Route path="create" element={<TagForm token={token} />} />
           </Route>
-          <Route path="/create-tag" element={<TagForm token={token} />} />
         </Route>
       </Routes>
     </>
