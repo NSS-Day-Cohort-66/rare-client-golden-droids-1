@@ -18,7 +18,10 @@ export const TagList = ({ token, staff }) => {
           {staff ? (
             <>
               <div className="tag--item">
-                <i className="fa-solid fa-gear fa-lg"></i>
+                <i
+                  className="fa-solid fa-gear fa-lg"
+                  onClick={() => handleDelete(tag.id)}
+                ></i>
               </div>
               <div className="tag--item">
                 <i className="fa-solid fa-trash-can fa-lg"></i>
@@ -32,6 +35,13 @@ export const TagList = ({ token, staff }) => {
       ));
     }
   };
+
+  const handleDelete = (tagId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete tag?"
+    );
+  };
+
   return (
     <article>
       <h2>Tags</h2>
