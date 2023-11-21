@@ -14,7 +14,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
           <Route path="/" element={<hello />} />
-          <Route path="/categories" element={<CategoriesList />} />
+          <Route path="/categories" element={<CategoriesList token={token}/>} />
           <Route
             path="/create_category"
             element={<CategoryForm token={token} />}
