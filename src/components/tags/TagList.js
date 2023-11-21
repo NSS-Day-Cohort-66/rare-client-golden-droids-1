@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { deleteTag, getAllTags } from "../../managers/TagManager";
 import "./Tag.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const TagList = ({ token, staff }) => {
   const [tags, setTags] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const retrieveTags = () => {
     getAllTags(token).then((tagArr) => {
@@ -25,9 +25,12 @@ export const TagList = ({ token, staff }) => {
           {staff ? (
             <>
               <div className="tag--item">
-                <i className="fa-solid fa-gear fa-lg" onClick={() => {
-                  navigate(`/tags/update/${tag.id}`)
-                }}></i>
+                <i
+                  className="fa-solid fa-gear fa-lg"
+                  onClick={() => {
+                    navigate(`/tags/update/${tag.id}`);
+                  }}
+                ></i>
               </div>
               <div className="tag--item">
                 <i
@@ -54,8 +57,6 @@ export const TagList = ({ token, staff }) => {
         retrieveTags();
       });
     }
-  };
-
   };
 
   return (
