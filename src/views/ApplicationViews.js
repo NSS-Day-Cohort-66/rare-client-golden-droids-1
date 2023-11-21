@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
+import { MyPosts } from "../components/posts/MyPosts";
 import { CommentForm } from "../components/comments/CommentForm";
 import { CategoriesList } from "../components/categories/CategoriesList";
 import { CategoryForm } from "../components/categories/CategoryForm";
@@ -18,6 +19,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
           <Route path="/" element="Hello" />
+          <Route path="/my_posts" element={<MyPosts token={token} />} />
           <Route path="/categories" element={<CategoriesList />} />
           <Route
             path="/create_category"
