@@ -8,7 +8,7 @@
 // create route for MyPosts in applicationviews
 
 import { useEffect, useState } from "react";
-import { getUserPosts } from "../managers/PostsManager";
+import { getUserPosts } from "../../managers/PostsManager";
 
 export const MyPosts = ({ token }) => {
   const [posts, setPosts] = useState([]);
