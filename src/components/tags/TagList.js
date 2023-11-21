@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteTag, getAllTags } from "../../managers/TagManager";
 import "./Tag.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const TagList = ({ token, staff }) => {
   const [tags, setTags] = useState([]);
@@ -63,6 +64,9 @@ export const TagList = ({ token, staff }) => {
     <article>
       <h2>Tags</h2>
       <div className="tags--container">{displayTags()}</div>
+      <Link to="/create-tag" className="create-tag-button">
+        Create New Tag
+      </Link>
     </article>
   );
 };

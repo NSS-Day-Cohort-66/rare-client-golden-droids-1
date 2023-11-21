@@ -8,6 +8,7 @@ import { CategoriesList } from "../components/categories/CategoriesList";
 import { CategoryForm } from "../components/categories/CategoryForm";
 import { TagList } from "../components/tags/TagList";
 import { UpdateTag } from "../components/tags/UpdateTag";
+import { TagForm } from "../components/tags/TagForm";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -43,6 +44,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
               element={<UpdateTag token={token} staff={staff} />}
             />
           </Route>
+          <Route path="/create-tag" element={<TagForm token={token} />} />
         </Route>
       </Routes>
     </>
