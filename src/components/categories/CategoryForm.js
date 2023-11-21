@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createCategory } from "../../managers/CategoryManager";
 
 export const CategoryForm = ({token}) => {
 
@@ -10,21 +11,16 @@ export const CategoryForm = ({token}) => {
     const [category, updateCategoryProps] = useState(initialCategoryState)
     const navigate = useNavigate()
 
-
-    
-    const createCategory = async (evt) => {
+    const handleSubmit = (evt) => {
         evt.preventDefault()
 
-        await fetch("http://localhost:8000/categories", {
-            method: "POST",
-            headers: {
-                "Authorization": `Token ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(category)
-        })
+        let newCategory = {
+            label: category.label
+        }
 
-        await navigate("/categories")
+        createCategory(newCategory, token).then(() => {
+            navigate(`/categories`)
+        })
     }
   
     return (
@@ -46,7 +42,7 @@ export const CategoryForm = ({token}) => {
 
                 <fieldset>
                     <button type="submit"
-                    onClick={createCategory}
+                    onClick={handleSubmit}
                     className="save-category-button">Save</button>
                 </fieldset>
             </form>

@@ -6,6 +6,15 @@ export const getAllTags = (token) => {
   }).then((res) => res.json());
 };
 
+export const deleteTag = (token, tagId) => {
+  return fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+};
+
 export const postTag = (obj, token) => {
   return fetch(`http://localhost:8000/tags`, {
     method: "POST",
