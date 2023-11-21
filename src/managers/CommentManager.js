@@ -8,3 +8,7 @@ export const postComment = (obj, token) => {
     body: JSON.stringify(obj),
   });
 };
+
+//! This works as well for the token
+// "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+// },
