@@ -26,7 +26,7 @@ export const MyPosts = ({ token }) => {
         {posts.map((post) => (
           <li key={post.id}>
             <h3>{post.title}</h3>
-            <p>By: {post.rare_user.username}</p>
+            <p>By: {post.rare_user.user.full_name}</p>
             <p>Category: {post.category.label}</p>
             <p>Published on: {post.publication_date}</p>
             <p>{post.content}</p>
