@@ -7,6 +7,7 @@ import { CommentForm } from "../components/comments/CommentForm";
 import { CategoriesList } from "../components/categories/CategoriesList";
 import { CategoryForm } from "../components/categories/CategoryForm";
 import { TagList } from "../components/tags/TagList";
+import { TagForm } from "../components/tags/TagForm";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -33,6 +34,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
             path="tags"
             element={<TagList token={token} staff={staff} />}
           />
+          <Route path="/create-tag" element={<TagForm token={token} />} />
         </Route>
       </Routes>
     </>

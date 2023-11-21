@@ -27,4 +27,31 @@ export const TagForm = ({ token }) => {
       navigate(`/tags`);
     });
   };
+
+  const displayForm = () => {
+    return (
+      <form className="commentForm" onSubmit={handleSave}>
+        <h2 className="commentForm__name">Add New Comment</h2>
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="content">Content: </label>
+            <input
+              type="text"
+              name="label"
+              required
+              autoFocus
+              className="form-control"
+              value={newTag.label}
+              onChange={changeTagState}
+            />
+          </div>
+        </fieldset>
+
+        <div>
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    );
+  };
+  return <>{displayForm()}</>;
 };
