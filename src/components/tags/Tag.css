@@ -1,0 +1,12 @@
+.tags--container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tag--container {
+  display: flex;
+}
+
+.tag--item {
+  padding: 0.5rem;
+}
