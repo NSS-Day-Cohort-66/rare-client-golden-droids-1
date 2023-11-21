@@ -7,6 +7,7 @@ import { CommentForm } from "../components/comments/CommentForm";
 import { CategoriesList } from "../components/categories/CategoriesList";
 import { CategoryForm } from "../components/categories/CategoryForm";
 import { TagList } from "../components/tags/TagList";
+import { UpdateTag } from "../components/tags/UpdateTag";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -20,7 +21,10 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
         <Route element={<Authorized token={token} />}>
           <Route path="/" element="Hello" />
           <Route path="/my_posts" element={<MyPosts token={token} />} />
-          <Route path="/categories" element={<CategoriesList token={token}/>} />
+          <Route
+            path="/categories"
+            element={<CategoriesList token={token} />}
+          />
           <Route
             path="/create_category"
             element={<CategoryForm token={token} />}
@@ -29,10 +33,16 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
             {/* //TODO the path for CommentForm should be new/:postId */}
             <Route path="new" element={<CommentForm token={token} />} />
           </Route>
-          <Route
-            path="tags"
-            element={<TagList token={token} staff={staff} />}
-          />
+          <Route path="tags">
+            <Route
+              path="all"
+              element={<TagList token={token} staff={staff} />}
+            />
+            <Route
+              path="update/:tagId"
+              element={<UpdateTag token={token} staff={staff} />}
+            />
+          </Route>
         </Route>
       </Routes>
     </>
