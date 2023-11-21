@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { deleteCategory, getAllCategories } from "../../managers/CategoryManager";
 import { useEffect, useState } from "react";
+import "./Category.css"
 
 export const CategoriesList = ({token, staff}) => {
   const [categories, setCategories] = useState([])

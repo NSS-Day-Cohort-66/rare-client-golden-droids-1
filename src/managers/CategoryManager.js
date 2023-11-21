@@ -19,13 +19,10 @@ export const createCategory = async (newCategory, token) => {
 };
 
 export const deleteCategory = (token, categoryId) => {
-  return (
-    fetch(`http://localhost:8000/categories/${categoryId}`),
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    }
-  );
+  return fetch(`http://localhost:8000/categories/${categoryId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
 };
