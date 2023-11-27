@@ -19,7 +19,7 @@ export const CategoryForm = ({token}) => {
         }
 
         createCategory(newCategory, token).then(() => {
-            navigate(`/categories`)
+            navigate(`/categories/all`)
         })
     }
   

@@ -10,3 +10,17 @@
   .category--item {
     padding: 0.5rem;
   }
+
+.delete-icon:hover {
+  color:red;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: lightskyblue;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
