@@ -1,34 +1,37 @@
-import { useNavigate } from "react-router-dom";
-import { deleteCategory, getAllCategories } from "../../managers/CategoryManager";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  deleteCategory,
+  getAllCategories,
+} from "../../managers/CategoryManager";
 import { useEffect, useState } from "react";
-import "./Category.css"
+import "./Category.css";
 
-export const CategoriesList = ({token, staff}) => {
-  const [categories, setCategories] = useState([])
+export const CategoriesList = ({ token, staff }) => {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   const fetchCategories = () => {
     getAllCategories(token).then((catArray) => {
-      setCategories(catArray)
-    })
-  }
+      setCategories(catArray);
+    });
+  };
 
   useEffect(() => {
     getAllCategories(token).then((categoryArray) => {
-      setCategories(categoryArray)
-    })
-  }, [token])
+      setCategories(categoryArray);
+    });
+  }, [token]);
 
   const handleDelete = (categoryId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to remove this category?"
     );
-    if(confirmDelete) {
+    if (confirmDelete) {
       deleteCategory(token, categoryId).then(() => {
-        fetchCategories()
-      })
+        fetchCategories();
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -38,14 +41,21 @@ export const CategoriesList = ({token, staff}) => {
           <ul>
             {categories.map((category) => (
               <div className="category--container" key={category.id}>
-                { staff ? (
+                {staff ? (
                   <>
                     <div className="category--item">
-                      <i className="fa-solid fa-gear fa-lg"></i>
+                      <i
+                        className="fa-solid fa-gear fa-lg edit-icon"
+                        onClick={() => {
+                          navigate(`/categories/update/${category.id}`);
+                        }}
+                      ></i>
                     </div>
                     <div className="category--item">
-                      <i className="fa-solid fa-trash-can fa-lg"
-                      onClick={() => handleDelete(category.id)}></i>
+                      <i
+                        className="fa-solid fa-trash-can fa-lg delete-icon"
+                        onClick={() => handleDelete(category.id)}
+                      ></i>
                     </div>
                   </>
                 ) : (
@@ -56,12 +66,8 @@ export const CategoriesList = ({token, staff}) => {
             ))}
           </ul>
         </div>
-        <button
-          onClick={() => {
-            navigate("/create_category");
-          }}
-        >
-          Create Category
+        <button className="submit-button">
+          <Link to="/categories/create">Create Category</Link>
         </button>
       </div>
     </>

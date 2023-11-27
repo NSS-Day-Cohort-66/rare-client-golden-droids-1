@@ -10,6 +10,7 @@ import { TagList } from "../components/tags/TagList";
 import { UpdateTag } from "../components/tags/UpdateTag";
 import { TagForm } from "../components/tags/TagForm";
 import { CommentList } from "../components/comments/CommentList";
+import { UpdateCategory } from "../components/categories/UpdateCategory";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -24,14 +25,18 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
           <Route path="/" element="Hello" />
           <Route path="/my_posts" element={<MyPosts token={token} />} />
           <Route path="/post_details" element="Hello" />
-          <Route
-            path="/categories"
-            element={<CategoriesList token={token} staff={staff} />}
-          />
-          <Route
-            path="/create_category"
-            element={<CategoryForm token={token} />}
-          />
+          <Route path="categories">
+            <Route
+              path="all"
+              element={<CategoriesList token={token} staff={staff} />}
+            />
+            <Route path="create" element={<CategoryForm token={token} />} />
+            <Route
+              path="update/:categoryId"
+              element={<UpdateCategory token={token} />}
+            />
+          </Route>
+
           <Route path="comments">
             <Route path="new/:postId" element={<CommentForm token={token} />} />
             <Route path="all/:postId" element={<CommentList token={token} />} />
