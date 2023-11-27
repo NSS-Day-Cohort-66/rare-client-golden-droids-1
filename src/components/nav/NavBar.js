@@ -70,7 +70,7 @@ export const NavBar = ({ token, setToken }) => {
           )}
         </div>
 
-        <div>
+        <div className="navbar-start">
           <Link to="/my_posts" className="navbar-item">
             My Posts
           </Link>
