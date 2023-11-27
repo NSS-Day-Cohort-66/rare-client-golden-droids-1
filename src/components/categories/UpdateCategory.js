@@ -37,7 +37,7 @@ export const UpdateCategory = ({ token }) => {
   const displayForm = () => {
     return (
       <form className="CategoryForm" onSubmit={handleSave}>
-        <h2 className="CategoryForm__name">Update Tag</h2>
+        <h2 className="CategoryForm__name">Update Category</h2>
         <fieldset>
           <div className="form-group">
             <label htmlFor="label">Label: </label>
