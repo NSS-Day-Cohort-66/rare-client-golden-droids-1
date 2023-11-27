@@ -24,7 +24,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
           <Route path="/my_posts" element={<MyPosts token={token} />} />
           <Route
             path="/categories"
-            element={<CategoriesList token={token} />}
+            element={<CategoriesList token={token} staff={staff} />}
           />
           <Route
             path="/create_category"
