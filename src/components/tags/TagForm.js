@@ -24,7 +24,7 @@ export const TagForm = ({ token }) => {
     };
     // do we need token here if just creating tag?
     postTag(tag, token).then(() => {
-      navigate(`/tags`);
+      navigate(`/tags/all`);
     });
   };
 
