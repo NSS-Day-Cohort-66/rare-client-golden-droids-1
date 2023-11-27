@@ -26,3 +26,22 @@ export const deleteCategory = (token, categoryId) => {
     },
   });
 };
+
+export const editCategory = (category, categoryId, token) => {
+  return fetch(`http://localhost:8000/categories/${categoryId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  });
+};
+
+export const getCategoryById = (token, categoryId) => {
+  return fetch(`http://localhost:8000/categories/${categoryId}`, {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  }).then((res) => res.json());
+};
