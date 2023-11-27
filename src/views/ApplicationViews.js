@@ -11,6 +11,7 @@ import { UpdateTag } from "../components/tags/UpdateTag";
 import { TagForm } from "../components/tags/TagForm";
 import { CommentList } from "../components/comments/CommentList";
 import { UpdateCategory } from "../components/categories/UpdateCategory";
+import { AllPosts } from "../components/posts/AllPosts";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -22,7 +23,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
         />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
-          <Route path="/" element="Hello" />
+          <Route path="/all_posts" element={<AllPosts token={token} />} />
           <Route path="/my_posts" element={<MyPosts token={token} />} />
           <Route path="/post_details" element="Hello" />
           <Route path="categories">
