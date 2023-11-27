@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { deleteTag, getAllTags } from "../../managers/TagManager";
 import "./Tag.css";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 export const TagList = ({ token, staff }) => {
   const [tags, setTags] = useState([]);
@@ -61,12 +60,21 @@ export const TagList = ({ token, staff }) => {
   };
 
   return (
-    <article>
-      <h2>Tags</h2>
-      <div className="tags--container">{displayTags()}</div>
-      <Link to="/tags/create" className="create-tag-button">
-        Create New Tag
-      </Link>
+    <article className="columns is-centered mt-6">
+      <div className="column is-one-fifth">
+        <h2 className="title has-text-centered">Tags</h2>
+        <div className="card p-3">{displayTags()}</div>
+        <div className="is-flex is-justify-content-center mt-6">
+          <button
+            className="button is-success"
+            onClick={() => {
+              navigate(`/tags/create`);
+            }}
+          >
+            Create New Tag
+          </button>
+        </div>
+      </div>
     </article>
   );
 };

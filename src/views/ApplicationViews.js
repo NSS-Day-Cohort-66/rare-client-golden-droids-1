@@ -9,6 +9,7 @@ import { CategoryForm } from "../components/categories/CategoryForm";
 import { TagList } from "../components/tags/TagList";
 import { UpdateTag } from "../components/tags/UpdateTag";
 import { TagForm } from "../components/tags/TagForm";
+import { CommentList } from "../components/comments/CommentList";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -31,8 +32,8 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
             element={<CategoryForm token={token} />}
           />
           <Route path="comments">
-            {/* //TODO the path for CommentForm should be new/:postId */}
-            <Route path="new" element={<CommentForm token={token} />} />
+            <Route path="new/:postId" element={<CommentForm token={token} />} />
+            <Route path="all/:postId" element={<CommentList token={token} />} />
           </Route>
           <Route path="tags">
             <Route

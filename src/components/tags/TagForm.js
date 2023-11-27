@@ -30,27 +30,27 @@ export const TagForm = ({ token }) => {
 
   const displayForm = () => {
     return (
-      <form className="commentForm" onSubmit={handleSave}>
-        <h2 className="commentForm__name">Add New Comment</h2>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="content">Content: </label>
+      <section className="columns is-centered mt-6">
+        <form className="column is-two-thirds" onSubmit={handleSave}>
+          <h2 className="title">Add New Comment</h2>
+          <fieldset className="field">
+            <label className="label">Content: </label>
             <input
               type="text"
               name="label"
               required
               autoFocus
-              className="form-control"
+              className="input"
               value={newTag.label}
               onChange={changeTagState}
             />
-          </div>
-        </fieldset>
+          </fieldset>
 
-        <div>
-          <button type="submit">Create</button>
-        </div>
-      </form>
+          <div className="control">
+            <button className="button is-success">Create</button>
+          </div>
+        </form>
+      </section>
     );
   };
   return <>{displayForm()}</>;
