@@ -22,3 +22,13 @@
 .tags--border {
   border: 1px solid black;
 }
+
+.fa-trash-can:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.fa-gear:hover {
+  color: hsl(141, 53%, 53%);
+  cursor: pointer;
+}

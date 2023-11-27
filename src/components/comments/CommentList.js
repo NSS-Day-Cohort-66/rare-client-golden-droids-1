@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { getCommentsByPostId } from "../../managers/CommentManager";
 import { Link, useParams } from "react-router-dom";
+import { getPostById } from "../../managers/PostsManager";
 
 export const CommentList = ({ token }) => {
   const [comments, setComments] = useState([]);
+  const [post, setPost] = useState({});
   const { postId } = useParams();
 
   useEffect(() => {
     getCommentsByPostId(token, postId).then((commentArr) => {
       setComments(commentArr);
+    });
+
+    getPostById(postId, token).then((postObj) => {
+      setPost(postObj);
     });
   }, [token, postId]);
 
@@ -27,7 +33,7 @@ export const CommentList = ({ token }) => {
   return (
     <article>
       <div>
-        <h2>Post Title Goes Here</h2>
+        <h2>{post.title}</h2>
         <div>{displayComments()}</div>
         <Link>Back to Post</Link>
       </div>
