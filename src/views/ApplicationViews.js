@@ -29,29 +29,24 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
             element={<CategoriesList token={token} />}
           />
           <Route
-              path="all"
-              element={<CategoriesList token={token} staff={staff} />}
-            />
-            <Route
-              path="create"
-              element={<CategoryForm token={token} />}
-            />
-            <Route path="update/:categoryId" element={<UpdateCategory token={token}/>} />
-          </Route>
-            
-          
-          <Route path="comments">
-            {/* //TODO the path for CommentForm should be new/:postId */}
-            <Route path="new" element={<CommentForm token={token} />} />
-          </Route>
-          <Route path="tags">
-            <Route
-              path="all"
-              element={<TagList token={token} staff={staff} />}
-            />
-            <Route path="update/:tagId" element={<UpdateTag token={token} />} />
-            <Route path="create" element={<TagForm token={token} />} />
-          </Route>
+            path="all"
+            element={<CategoriesList token={token} staff={staff} />}
+          />
+          <Route path="create" element={<CategoryForm token={token} />} />
+          <Route
+            path="update/:categoryId"
+            element={<UpdateCategory token={token} />}
+          />
+        </Route>
+
+        <Route path="comments">
+          {/* //TODO the path for CommentForm should be new/:postId */}
+          <Route path="new" element={<CommentForm token={token} />} />
+        </Route>
+        <Route path="tags">
+          <Route path="all" element={<TagList token={token} staff={staff} />} />
+          <Route path="update/:tagId" element={<UpdateTag token={token} />} />
+          <Route path="create" element={<TagForm token={token} />} />
         </Route>
       </Routes>
     </>
