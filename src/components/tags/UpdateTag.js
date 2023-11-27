@@ -38,7 +38,7 @@ export const UpdateTag = ({ token }) => {
     return (
       <section className="columns is-centered mt-6">
         <form className="column is-two-thirds" onSubmit={handleSave}>
-          <h2 className="title">Add New Comment</h2>
+          <h2 className="title">Update Tag</h2>
           <fieldset className="field">
             <label className="label">Label: </label>
             <div className="control">
