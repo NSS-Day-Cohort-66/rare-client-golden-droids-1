@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { deleteTag, getAllTags } from "../../managers/TagManager";
 import "./Tag.css";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const TagList = ({ token, staff }) => {
   const [tags, setTags] = useState([]);
+
+  const navigate = useNavigate();
 
   const retrieveTags = () => {
     getAllTags(token).then((tagArr) => {
@@ -23,7 +26,12 @@ export const TagList = ({ token, staff }) => {
           {staff ? (
             <>
               <div className="tag--item">
-                <i className="fa-solid fa-gear fa-lg"></i>
+                <i
+                  className="fa-solid fa-gear fa-lg"
+                  onClick={() => {
+                    navigate(`/tags/update/${tag.id}`);
+                  }}
+                ></i>
               </div>
               <div className="tag--item">
                 <i
@@ -56,7 +64,7 @@ export const TagList = ({ token, staff }) => {
     <article>
       <h2>Tags</h2>
       <div className="tags--container">{displayTags()}</div>
-      <Link to="/create-tag" className="create-tag-button">
+      <Link to="/tags/create" className="create-tag-button">
         Create New Tag
       </Link>
     </article>
