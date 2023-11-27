@@ -1,10 +1,22 @@
 .comments--container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  justify-content: space-around;
 }
 
 .comment--container {
   display: flex;
+  flex-basis: 40%;
+  flex-direction: column;
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 10px;
+}
+
+.comment--header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .comment--item {

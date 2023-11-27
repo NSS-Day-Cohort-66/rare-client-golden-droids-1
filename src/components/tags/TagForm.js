@@ -32,7 +32,7 @@ export const TagForm = ({ token }) => {
     return (
       <section className="columns is-centered mt-6">
         <form className="column is-two-thirds" onSubmit={handleSave}>
-          <h2 className="title">Add New Comment</h2>
+          <h2 className="title">Add New Tag</h2>
           <fieldset className="field">
             <label className="label">Content: </label>
             <input
