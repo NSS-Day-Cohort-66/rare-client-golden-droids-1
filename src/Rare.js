@@ -4,7 +4,7 @@ import { NavBar } from "./components/nav/NavBar";
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
-  const staff = localStorage.getItem("staff");
+  const staff = JSON.parse(localStorage.getItem("staff")); // should be a boolean value
 
   const setToken = (newToken) => {
     localStorage.setItem("auth_token", newToken);

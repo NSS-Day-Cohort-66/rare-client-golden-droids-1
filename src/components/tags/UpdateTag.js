@@ -36,39 +36,43 @@ export const UpdateTag = ({ token }) => {
 
   const displayForm = () => {
     return (
-      <form className="TagForm" onSubmit={handleSave}>
-        <h2 className="TagForm__name">Update Tag</h2>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="label">Label: </label>
-            <input
-              type="text"
-              name="label"
-              required
-              autoFocus
-              className="form-control"
-              value={currentTag.label}
-              onChange={changeTagState}
-            />
+      <section className="columns is-centered mt-6">
+        <form className="column is-two-thirds" onSubmit={handleSave}>
+          <h2 className="title">Update Tag</h2>
+          <fieldset className="field">
+            <label className="label">Label: </label>
+            <div className="control">
+              <input
+                type="text"
+                name="label"
+                required
+                autoFocus
+                className="input"
+                value={currentTag.label}
+                onChange={changeTagState}
+              />
+            </div>
+          </fieldset>
+
+          <div className="field is-grouped">
+            <div className="control">
+              <button type="submit" className="button is-success">
+                Save
+              </button>
+            </div>
+            <div className="control">
+              <button
+                className="button is-success is-light"
+                onClick={() => {
+                  navigate(`/tags/all`);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </fieldset>
-        <div className="buttons--container">
-          <div className="button--container">
-            <button type="submit" onClick={handleSave}>
-              Save
-            </button>
-          </div>
-          <div className="button--container">
-            <button
-              onClick={() => {
-                navigate(`/tags/all`);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </section>
     );
   };
 
