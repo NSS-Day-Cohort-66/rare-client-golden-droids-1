@@ -19,10 +19,6 @@
   margin-right: 2rem;
 }
 
-.tags--border {
-  border: 1px solid black;
-}
-
 .fa-trash-can:hover {
   color: red;
   cursor: pointer;

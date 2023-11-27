@@ -22,20 +22,22 @@ export const CommentList = ({ token }) => {
     if (comments && comments.length) {
       return comments.map((comment) => (
         <div className="comment--container" key={comment.id}>
-          <div>{comment.author.user.full_name}</div>
-          <div>{comment.created_on}</div>
-          <div>{comment.content}</div>
+          <div className="comment--item">{comment.author.user.full_name}</div>
+          <div className="comment--item">{comment.created_on}</div>
+          <div className="comment--item">{comment.content}</div>
         </div>
       ));
     }
   };
 
   return (
-    <article>
-      <div>
-        <h2>{post.title}</h2>
-        <div>{displayComments()}</div>
-        <Link>Back to Post</Link>
+    <article className="columns is-centered mt-6">
+      <div className="column is-one-fifth">
+        <h2 className="title has-text-centered">{post.title}</h2>
+        <div className="card p-3">{displayComments()}</div>
+        <div className="is-flex is-justify-content-center mt-6">
+          <Link to="/post_details">Back to Post</Link>
+        </div>
       </div>
     </article>
   );
