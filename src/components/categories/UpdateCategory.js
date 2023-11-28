@@ -4,7 +4,7 @@ import { editCategory, getCategoryById } from "../../managers/CategoryManager";
 import "./Category.css";
 
 export const UpdateCategory = ({ token }) => {
-  const [currentCategory, setCurrentCategory] = useState({label: ""});
+  const [currentCategory, setCurrentCategory] = useState({ label: "" });
   const { categoryId } = useParams();
 
   const navigate = useNavigate();
@@ -36,39 +36,51 @@ export const UpdateCategory = ({ token }) => {
 
   const displayForm = () => {
     return (
-      <form className="CategoryForm" onSubmit={handleSave}>
-        <h2 className="CategoryForm__name">Update Category</h2>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="label">Label: </label>
-            <input
-              type="text"
-              name="label"
-              required
-              autoFocus
-              className="form-control"
-              value={currentCategory.label}
-              onChange={changeCategoryState}
-            />
+      <section className="columns is-centered mt-6">
+        <form
+          className="CategoryForm column is-two-thirds"
+          onSubmit={handleSave}
+        >
+          <h2 className="CategoryForm__name title">Update Category</h2>
+          <fieldset className="field">
+            <div className="form-group">
+              <label className="label">Label: </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="label"
+                  required
+                  autoFocus
+                  className="input"
+                  value={currentCategory.label}
+                  onChange={changeCategoryState}
+                />
+              </div>
+            </div>
+          </fieldset>
+          <div className="buttons--container field is-grouped">
+            <div className="button--container control">
+              <button
+                type="submit"
+                className="button is-success"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            </div>
+            <div className="button--container">
+              <button
+                className="button is-danger is-light"
+                onClick={() => {
+                  navigate(`/categories/all`);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </fieldset>
-        <div className="buttons--container">
-          <div className="button--container">
-            <button type="submit" onClick={handleSave}>
-              Save
-            </button>
-          </div>
-          <div className="button--container">
-            <button
-              onClick={() => {
-                navigate(`/categories/all`);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </section>
     );
   };
 

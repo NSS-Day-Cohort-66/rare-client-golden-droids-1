@@ -34,10 +34,10 @@ export const CategoriesList = ({ token, staff }) => {
   };
 
   return (
-    <>
-      <div>
-        <h1>Categories List</h1>
-        <div>
+    <article className="columns is-centered mt-6">
+      <div className="column is-one-fifth">
+        <h1 className="title has-text-centered">Categories</h1>
+        <div className="categories--container card p-3 has-background-success-light">
           <ul>
             {categories.map((category) => (
               <div className="category--container" key={category.id}>
@@ -66,10 +66,17 @@ export const CategoriesList = ({ token, staff }) => {
             ))}
           </ul>
         </div>
-        <button className="submit-button">
-          <Link to="/categories/create">Create Category</Link>
-        </button>
+        <div className="is-flex is-justify-content-center mt-6">
+          <button
+            className="submit-button button is-success"
+            onClick={() => {
+              navigate(`/categories/create`);
+            }}
+          >
+            Create Category
+          </button>
+        </div>
       </div>
-    </>
+    </article>
   );
 };

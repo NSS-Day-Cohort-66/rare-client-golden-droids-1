@@ -30,27 +30,34 @@ export const CommentForm = ({ token }) => {
 
   const displayForm = () => {
     return (
-      <form className="commentForm" onSubmit={handleSave}>
-        <h2 className="commentForm__name">Add New Comment</h2>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="content">Content: </label>
-            <input
-              type="text"
-              name="content"
-              required
-              autoFocus
-              className="form-control"
-              value={newComment.content}
-              onChange={changeCommentState}
-            />
-          </div>
-        </fieldset>
+      <section className="columns is-centered mt-6">
+        <form
+          className="commentForm column is-two-thirds"
+          onSubmit={handleSave}
+        >
+          <h2 className="commentForm__name title">Add New Comment</h2>
+          <fieldset className="field">
+            <div className="form-group">
+              <label className="label">Content: </label>
+              <input
+                type="text"
+                name="content"
+                required
+                autoFocus
+                className="input"
+                value={newComment.content}
+                onChange={changeCommentState}
+              />
+            </div>
+          </fieldset>
 
-        <div>
-          <button type="submit">Create</button>
-        </div>
-      </form>
+          <div>
+            <button type="submit" className="button is-success">
+              Save
+            </button>
+          </div>
+        </form>
+      </section>
     );
   };
 
