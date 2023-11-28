@@ -47,7 +47,7 @@ export const TagForm = ({ token }) => {
           </fieldset>
 
           <div className="control">
-            <button className="button is-success">Create</button>
+            <button className="button is-success">Save</button>
           </div>
         </form>
       </section>

@@ -12,6 +12,7 @@ import { TagForm } from "../components/tags/TagForm";
 import { CommentList } from "../components/comments/CommentList";
 import { UpdateCategory } from "../components/categories/UpdateCategory";
 import { AllPosts } from "../components/posts/AllPosts";
+import { PostDetails } from "../components/posts/PostDetails";
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -23,9 +24,15 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
         />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
-          <Route path="/all_posts" element={<AllPosts token={token} />} />
-          <Route path="/my_posts" element={<MyPosts token={token} />} />
-          <Route path="/post_details" element="Hello" />
+          <Route path="/" element="Work in progress..." />
+          <Route path="posts">
+            <Route path="all" element={<AllPosts token={token} />} />
+            <Route path="mine" element={<MyPosts token={token} />} />
+            <Route
+              path="details/:postId"
+              element={<PostDetails token={token} />}
+            />
+          </Route>
           <Route path="categories">
             <Route
               path="all"

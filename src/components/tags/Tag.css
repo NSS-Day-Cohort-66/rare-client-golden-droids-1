@@ -1,6 +1,6 @@
 .tags--container {
-  display: flex;
-  flex-direction: column;
+  border: 2px dashed black;
+  border-radius: 10px;
 }
 
 .tag--container {

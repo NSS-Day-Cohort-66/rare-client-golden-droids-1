@@ -62,7 +62,7 @@ export const UpdateTag = ({ token }) => {
             </div>
             <div className="control">
               <button
-                className="button is-success is-light"
+                className="button is-danger is-light"
                 onClick={() => {
                   navigate(`/tags/all`);
                 }}

@@ -63,7 +63,9 @@ export const TagList = ({ token, staff }) => {
     <article className="columns is-centered mt-6">
       <div className="column is-one-fifth">
         <h2 className="title has-text-centered">Tags</h2>
-        <div className="card p-3">{displayTags()}</div>
+        <div className="tags--container card p-3 has-background-success-light">
+          {displayTags()}
+        </div>
         <div className="is-flex is-justify-content-center mt-6">
           <button
             className="button is-success"
@@ -71,7 +73,7 @@ export const TagList = ({ token, staff }) => {
               navigate(`/tags/create`);
             }}
           >
-            Create New Tag
+            Create Tag
           </button>
         </div>
       </div>

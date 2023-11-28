@@ -1,0 +1,25 @@
+.posts--container {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.post--container {
+  display: flex;
+  flex-basis: 40%;
+  flex-direction: column;
+  border: 2px dashed black;
+  border-radius: 10px;
+}
+
+.post--container :hover {
+  cursor: pointer;
+  background-color: hsl(143, 36%, 74%);
+}
+
+.detail--container {
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 10px;
+}
