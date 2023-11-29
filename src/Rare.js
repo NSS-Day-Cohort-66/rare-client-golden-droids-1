@@ -13,7 +13,7 @@ export const Rare = () => {
 
   return (
     <>
-      <NavBar token={token} setToken={setToken} />
+      <NavBar token={token} setToken={setToken} staff={staff} />
       <ApplicationViews token={token} setToken={setToken} staff={staff} />
     </>
   );
