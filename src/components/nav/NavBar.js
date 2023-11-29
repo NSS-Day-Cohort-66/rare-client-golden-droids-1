@@ -16,13 +16,13 @@ export const NavBar = ({ token, setToken, staff }) => {
   const userLink = () => {
     if (token && staff) {
       return (
-        <Link to="/tags/all" className="navbar-item">
+        <Link to="/users/all" className="navbar-item">
           User Manager
         </Link>
       );
     } else if (token) {
       return (
-        <Link to="/tags/all" className="navbar-item">
+        <Link to="/users/all" className="navbar-item">
           Users
         </Link>
       );
