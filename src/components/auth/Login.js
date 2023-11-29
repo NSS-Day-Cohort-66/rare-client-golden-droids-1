@@ -21,6 +21,8 @@ export const Login = ({ setToken }) => {
         setToken(res.token);
         localStorage.setItem("staff", res.staff);
         navigate("/");
+        localStorage.setItem("id", res.id);
+        navigate("/");
       } else {
         setisUnsuccessful(true);
       }

@@ -18,13 +18,3 @@
 .button--container {
   margin-right: 2rem;
 }
-
-.fa-trash-can:hover {
-  color: red;
-  cursor: pointer;
-}
-
-.fa-gear:hover {
-  color: hsl(141, 53%, 53%);
-  cursor: pointer;
-}
