@@ -17,6 +17,15 @@ export const getCommentsByPostId = (token, postId) => {
   }).then((res) => res.json());
 };
 
+export const deleteComment = (token, commentId) => {
+  return fetch(`http://localhost:8000/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+};
+
 //! This works as well for the token
 // "Authorization": `Token ${localStorage.getItem("auth_token")}`,
 // },
