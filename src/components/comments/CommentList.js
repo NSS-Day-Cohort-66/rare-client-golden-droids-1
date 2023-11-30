@@ -26,11 +26,24 @@ export const CommentList = ({ token }) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to remove this comment?"
     );
+    // if (confirmDelete) {
+    //   deleteComment(token, commentId).then(() => {
+    //     getCommentsByPostId(token, postId).then((commentArr) => {
+    //       setComments(commentArr);
+    //     });
+    //   });
+    // }
     if (confirmDelete) {
-      deleteComment(token, commentId).then(() => {
-        getCommentsByPostId(token, postId).then((commentArr) => {
-          setComments(commentArr);
-        });
+      deleteComment(token, commentId).then((response) => {
+        if (response.status === 403) {
+          // Show a custom alert for forbidden action
+          window.alert("You can't delete a comment that isn't yours");
+        } else {
+          // Fetch comments again to update the UI
+          getCommentsByPostId(token, postId).then((commentArr) => {
+            setComments(commentArr);
+          });
+        }
       });
     }
   };
@@ -65,7 +78,7 @@ export const CommentList = ({ token }) => {
           {displayComments()}
         </div>
         <div className="is-flex is-justify-content-center mt-6">
-          <Link to="/post_details">Back to Post</Link>
+          <Link to={`/posts/details/${postId}`}>Back to Post</Link>
         </div>
       </div>
     </article>
