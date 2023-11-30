@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
 
-export const NavBar = ({ token, setToken }) => {
+export const NavBar = ({ token, setToken, staff }) => {
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
@@ -11,6 +11,24 @@ export const NavBar = ({ token, setToken }) => {
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
     navbar.current.classList.toggle("is-active");
+  };
+
+  const userLink = () => {
+    if (token && staff) {
+      return (
+        <Link to="/users/all" className="navbar-item">
+          User Manager
+        </Link>
+      );
+    } else if (token) {
+      return (
+        <Link to="/users/all" className="navbar-item">
+          Users
+        </Link>
+      );
+    } else {
+      return "";
+    }
   };
 
   return (
@@ -78,6 +96,8 @@ export const NavBar = ({ token, setToken }) => {
             ""
           )}
         </div>
+
+        <div className="navbar-start">{userLink()}</div>
 
         <div className="navbar-end">
           <div className="navbar-item">
