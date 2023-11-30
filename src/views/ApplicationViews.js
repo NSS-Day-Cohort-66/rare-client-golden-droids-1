@@ -13,6 +13,7 @@ import { CommentList } from "../components/comments/CommentList";
 import { UpdateCategory } from "../components/categories/UpdateCategory";
 import { AllPosts } from "../components/posts/AllPosts";
 import { PostDetails } from "../components/posts/PostDetails";
+import { UpdatePost } from "../components/posts/UpdatePost";
 
 export const ApplicationViews = ({
   token,
@@ -38,6 +39,12 @@ export const ApplicationViews = ({
               path="details/:postId"
               element={
                 <PostDetails token={token} currentUserId={currentUserId} />
+              }
+            />
+            <Route
+              path="update/:postId"
+              element={
+                <UpdatePost token={token} currentUserId={currentUserId} />
               }
             />
           </Route>

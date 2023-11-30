@@ -42,7 +42,12 @@ export const PostDetails = ({ token, currentUserId }) => {
             {currentUserId === post.rare_user?.user.id ? (
               <>
                 <div className="tag--item">
-                  <i className="fa-solid fa-gear fa-lg"></i>
+                  <i
+                    className="fa-solid fa-gear fa-lg"
+                    onClick={() => {
+                      navigate(`/posts/update/${post.id}`);
+                    }}
+                  ></i>
                 </div>
                 <div className="tag--item">
                   <i
