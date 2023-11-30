@@ -24,3 +24,12 @@ export const getUserPosts = (token) => {
     },
   }).then((response) => response.json());
 };
+
+export const deletePost = (token, postId) => {
+  return fetch(`http://localhost:8000/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+};

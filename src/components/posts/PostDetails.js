@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPostById } from "../../managers/PostManager";
+import { deletePost, getPostById } from "../../managers/PostManager";
 
-export const PostDetails = ({ token }) => {
+export const PostDetails = ({ token, currentUserId }) => {
   const [post, setPost] = useState({});
 
   const { postId } = useParams();
@@ -13,6 +13,17 @@ export const PostDetails = ({ token }) => {
       setPost(postObj);
     });
   }, [token, postId]);
+
+  const handleDelete = (postId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete tag?"
+    );
+    if (confirmDelete) {
+      deletePost(token, postId).then(() => {
+        navigate(`/posts/mine`);
+      });
+    }
+  };
 
   return (
     <article className="columns is-centered mt-6">
@@ -27,6 +38,23 @@ export const PostDetails = ({ token }) => {
             <div className="content">{post.publication_date}</div>
           </div>
           <div className="content">{post.content}</div>
+          <div className="is-flex is-justify-content-end">
+            {currentUserId === post.rare_user?.user.id ? (
+              <>
+                <div className="tag--item">
+                  <i className="fa-solid fa-gear fa-lg"></i>
+                </div>
+                <div className="tag--item">
+                  <i
+                    className="fa-solid fa-trash-can fa-lg"
+                    onClick={() => handleDelete(post.id)}
+                  ></i>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         <div className="field is-grouped is-grouped-centered mb-3">
           <div className="control">

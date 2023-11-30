@@ -14,7 +14,13 @@ import { UpdateCategory } from "../components/categories/UpdateCategory";
 import { AllPosts } from "../components/posts/AllPosts";
 import { PostDetails } from "../components/posts/PostDetails";
 
-export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
+export const ApplicationViews = ({
+  token,
+  setToken,
+  staff,
+  setStaff,
+  currentUserId,
+}) => {
   return (
     <>
       <Routes>
@@ -30,7 +36,9 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
             <Route path="mine" element={<MyPosts token={token} />} />
             <Route
               path="details/:postId"
-              element={<PostDetails token={token} />}
+              element={
+                <PostDetails token={token} currentUserId={currentUserId} />
+              }
             />
           </Route>
           <Route path="categories">
