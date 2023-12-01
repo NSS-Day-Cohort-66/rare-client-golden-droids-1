@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../managers/PostManager";
+import { getAllTags } from "../../managers/TagManager";
+import { createPostTag } from "../../managers/PostTagManager";
 
 export const PostDetails = ({ token, currentUserId, staff }) => {
   const [post, setPost] = useState({});
+  const [tags, setTags] = useState({});
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [showTagModal, setShowTagModal] = useState(false);
 
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -14,6 +19,12 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
     });
   }, [token, postId]);
 
+  useEffect(() => {
+    getAllTags(token).then((tagsArray) => {
+      setTags(tagsArray);
+    });
+  }, [token]);
+
   const handleDelete = (postId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete tag?"
@@ -22,6 +33,43 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
       deletePost(token, postId).then(() => {
         navigate(`/posts/mine`);
       });
+    }
+  };
+
+  const openTagModal = () => {
+    setShowTagModal(true);
+  };
+
+  const closeTagModal = () => {
+    setShowTagModal(false);
+  };
+
+  const handleTagSelection = (tagId) => {
+    const updatedTags = [...selectedTags];
+    const index = updatedTags.indexOf(tagId);
+
+    if (index === -1) {
+      updatedTags.push(tagId);
+    } else {
+      updatedTags.splice(index, 1);
+    }
+    setSelectedTags(updatedTags);
+  };
+
+  const handleSaveTags = async () => {
+    try {
+      const promises = selectedTags.map((tagId) =>
+        createPostTag(postId, tagId, token)
+      );
+
+      await Promise.all(promises);
+
+      getPostById(postId, token).then((postObj) => {
+        setPost(postObj);
+      });
+      closeTagModal();
+    } catch (error) {
+      console.error("Error creating post tags:", error);
     }
   };
 
@@ -67,7 +115,26 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
             )}
           </div>
         </div>
+        <div className="content">
+          <strong className="has-text-white">Associated Tags:</strong>
+          {post.post_tags && post.post_tags.length > 0 ? (
+            <ul>
+              {post.post_tags?.map((tag) => (
+                <li className="has-text-white" key={tag.id}>{tag.label}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="has-text-white">No tags associated with this post.</p>
+          )}
+        </div>
         <div className="field is-grouped is-grouped-centered mb-3">
+          {currentUserId === post.rare_user?.user.id && (
+            <div className="control">
+              <button className="button" onClick={openTagModal}>
+                Manage Tags
+              </button>
+            </div>
+          )}
           <div className="control">
             <button
               className="button is-warning"
@@ -90,6 +157,52 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
           </div>
         </div>
       </div>
+      {showTagModal && (
+        <div className="modal is-active">
+          <div
+            className="modal-background"
+            style={{ backgroundColor: "rgba(200, 160, 255, 0.4)" }}
+            onClick={closeTagModal}
+          ></div>
+          <div className="modal-content">
+            <div className="box">
+              <h3 className="title is-3">Manage Tags</h3>
+              <ul>
+                {tags.map((tag) => (
+                  <li key={tag.id}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        value={tag.id}
+                        onChange={(e) => {
+                          const selectedTag = parseInt(e.target.value);
+                          handleTagSelection(selectedTag);
+                        }}
+                      />
+                      {tag.label}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+              <div className="field is-grouped is-grouped-centered mt-3">
+                <div className="control">
+                  <button
+                    className="button is-success"
+                    onClick={handleSaveTags}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            className="modal-close is-large"
+            aria-label="close"
+            onClick={closeTagModal}
+          ></button>
+        </div>
+      )}
     </article>
   );
 };
