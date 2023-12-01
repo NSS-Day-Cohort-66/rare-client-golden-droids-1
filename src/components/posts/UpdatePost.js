@@ -6,6 +6,7 @@ import { getAllCategories } from "../../managers/CategoryManager";
 export const UpdatePost = ({ token }) => {
   const [currentPost, setCurrentPost] = useState({});
   const [categories, setCategories] = useState([]);
+  const [ImageString, setImageString] = useState("");
   const { postId } = useParams();
   const navigate = useNavigate();
 
@@ -46,6 +47,21 @@ export const UpdatePost = ({ token }) => {
       navigate(`/posts/details/${postId}`);
     });
   };
+
+  const getBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result));
+    reader.readAsDataURL(file);
+  };
+
+  const createImageString = (event) => {
+    getBase64(event.target.files[0], (base64ImageString) => {
+      console.log("Base64 of file is", base64ImageString);
+
+      setImageString(base64ImageString);
+    });
+  };
+
   return (
     <section className="columns is-centered mt-6">
       <form className="column is-two-thirds" onSubmit={handleSave}>
@@ -94,14 +110,13 @@ export const UpdatePost = ({ token }) => {
                 className="file-input"
                 type="file"
                 name="image_url"
-                value={""}
-                onChange={changePostState}
+                onChange={createImageString}
               />
               <span className="file-cta">
                 <span className="file-icon">
                   <i className="fas fa-upload"></i>
                 </span>
-                <span className="file-label">Choose a file…</span>
+                <span className="file-label">Choose a picture...</span>
               </span>
               <span className="file-name">
                 {currentPost.image_url === null
@@ -109,6 +124,11 @@ export const UpdatePost = ({ token }) => {
                   : currentPost.image_url?.name}
               </span>
             </label>
+            <div className="control">
+              <button onClick={() => {}} className="button is-success">
+                Save
+              </button>
+            </div>
           </div>
         </fieldset>
         <fieldset className="field">
