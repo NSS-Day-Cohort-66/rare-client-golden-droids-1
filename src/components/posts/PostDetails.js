@@ -116,11 +116,11 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
           </div>
         </div>
         <div className="content">
-          <strong>Associated Tags:</strong>
+          <strong className="has-text-white">Associated Tags:</strong>
           {post.post_tags && post.post_tags.length > 0 ? (
             <ul>
               {post.post_tags?.map((tag) => (
-                <li key={tag.id}>{tag.label}</li>
+                <li className="has-text-white" key={tag.id}>{tag.label}</li>
               ))}
             </ul>
           ) : (
