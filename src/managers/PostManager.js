@@ -44,3 +44,14 @@ export const editPost = (post, postId, token) => {
     body: JSON.stringify(post),
   });
 };
+
+export const createPost = (obj, token) => {
+  return fetch(`http://localhost:8000/posts`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  }).then((res) => res.json());
+};

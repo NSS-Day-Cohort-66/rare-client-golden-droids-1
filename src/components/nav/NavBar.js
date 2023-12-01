@@ -80,6 +80,15 @@ export const NavBar = ({ token, setToken, staff }) => {
         </div>
         <div className="navbar-start">
           {token ? (
+            <Link to="/posts/new" className="navbar-item">
+              New Posts
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="navbar-start">
+          {token ? (
             <Link to="/categories/all" className="navbar-item">
               Category Manager
             </Link>
