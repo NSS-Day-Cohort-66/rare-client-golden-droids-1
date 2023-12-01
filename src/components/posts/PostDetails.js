@@ -27,7 +27,7 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
 
   const handleDelete = (postId) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete tag?"
+      "Are you sure you want to delete post?"
     );
     if (confirmDelete) {
       deletePost(token, postId).then(() => {
@@ -120,7 +120,9 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
           {post.post_tags && post.post_tags.length > 0 ? (
             <ul>
               {post.post_tags?.map((tag) => (
-                <li className="has-text-white" key={tag.id}>{tag.label}</li>
+                <li className="has-text-white" key={tag.id}>
+                  {tag.label}
+                </li>
               ))}
             </ul>
           ) : (

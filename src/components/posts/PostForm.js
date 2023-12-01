@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { editPost, getPostById } from "../../managers/PostManager";
+import { useNavigate } from "react-router-dom";
+import { createPost } from "../../managers/PostManager";
 import { getAllCategories } from "../../managers/CategoryManager";
 
-export const UpdatePost = ({ token }) => {
-  const [currentPost, setCurrentPost] = useState({});
+export const PostForm = ({ token }) => {
+  const [newPost, setNewPost] = useState({ image_url: null });
   const [categories, setCategories] = useState([]);
   const [imageName, setImageName] = useState("");
-  const { postId } = useParams();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    getPostById(postId, token).then((postObj) => {
-      setCurrentPost(postObj);
-    });
-  }, [postId, token]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllCategories(token).then((catArr) => {
@@ -23,8 +17,8 @@ export const UpdatePost = ({ token }) => {
   }, []);
 
   const changePostState = (e) => {
-    setCurrentPost({
-      ...currentPost,
+    setNewPost({
+      ...newPost,
       [e.target.name]: e.target.value,
     });
   };
@@ -32,17 +26,15 @@ export const UpdatePost = ({ token }) => {
   const handleSave = (e) => {
     e.preventDefault();
 
-    const post = {
-      categoryId: currentPost.category.id
-        ? currentPost.category.id
-        : currentPost.category,
-      title: currentPost.title,
-      image_url: null,
-      content: currentPost.content,
+    let post = {
+      categoryId: parseInt(newPost.category),
+      title: newPost.title,
+      image_url: newPost.image_url,
+      content: newPost.content,
     };
 
-    editPost(post, postId, token).then(() => {
-      navigate(`/posts/details/${postId}`);
+    createPost(post, token).then((postObj) => {
+      navigate(`/posts/details/${postObj["id"]}`);
     });
   };
 
@@ -56,8 +48,8 @@ export const UpdatePost = ({ token }) => {
     getBase64(event.target.files[0], (base64ImageString) => {
       console.log("Base64 of file is", base64ImageString);
 
-      setCurrentPost({
-        ...currentPost,
+      setNewPost({
+        ...newPost,
         [event.target.name]: base64ImageString,
       });
     });
@@ -68,14 +60,14 @@ export const UpdatePost = ({ token }) => {
   return (
     <section className="columns is-centered mt-6">
       <form className="column is-two-thirds" onSubmit={handleSave}>
-        <h2 className="title">Update Post</h2>
+        <h2 className="title">Add New Post</h2>
         <fieldset className="field">
           <label className="label">Category: </label>
           <div className="control">
             <div className="select">
               <select
                 name="category"
-                value={currentPost.category?.id}
+                value={newPost.category?.id}
                 required
                 autoFocus
                 onChange={changePostState}
@@ -94,17 +86,15 @@ export const UpdatePost = ({ token }) => {
         </fieldset>
         <fieldset className="field">
           <label className="label">Title: </label>
-          <div className="control">
-            <input
-              type="text"
-              name="title"
-              required
-              autoFocus
-              className="input"
-              value={currentPost.title}
-              onChange={changePostState}
-            />
-          </div>
+          <input
+            type="text"
+            name="title"
+            required
+            autoFocus
+            className="input"
+            value={newPost.title}
+            onChange={changePostState}
+          />
         </fieldset>
         <fieldset className="field">
           <div className="file has-name">
@@ -122,42 +112,26 @@ export const UpdatePost = ({ token }) => {
                 <span className="file-label">Choose a picture...</span>
               </span>
               <span className="file-name">
-                {currentPost.image_url === null ? "No file chosen" : imageName}
+                {newPost.image_url === null ? "No file chosen" : imageName}
               </span>
             </label>
           </div>
         </fieldset>
         <fieldset className="field">
           <label className="label">Content: </label>
-          <div className="control">
-            <input
-              type="text"
-              name="content"
-              required
-              autoFocus
-              className="input"
-              value={currentPost.content}
-              onChange={changePostState}
-            />
-          </div>
+          <input
+            type="text"
+            name="content"
+            required
+            autoFocus
+            className="input"
+            value={newPost.content}
+            onChange={changePostState}
+          />
         </fieldset>
 
-        <div className="field is-grouped">
-          <div className="control">
-            <button type="submit" className="button is-success">
-              Save
-            </button>
-          </div>
-          <div className="control">
-            <button
-              className="button is-danger is-light"
-              onClick={() => {
-                navigate(`/posts/mine`);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
+        <div className="control">
+          <button className="button is-success">Save</button>
         </div>
       </form>
     </section>
