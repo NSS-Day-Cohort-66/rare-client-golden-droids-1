@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../managers/PostManager";
 
-export const PostDetails = ({ token, currentUserId }) => {
+export const PostDetails = ({ token, currentUserId, staff }) => {
   const [post, setPost] = useState({});
 
   const { postId } = useParams();
@@ -44,22 +44,24 @@ export const PostDetails = ({ token, currentUserId }) => {
           <div className="content">{post.content}</div>
           <div className="is-flex is-justify-content-end">
             {currentUserId === post.rare_user?.user.id ? (
-              <>
-                <div className="tag--item">
-                  <i
-                    className="fa-solid fa-gear fa-lg"
-                    onClick={() => {
-                      navigate(`/posts/update/${post.id}`);
-                    }}
-                  ></i>
-                </div>
-                <div className="tag--item">
-                  <i
-                    className="fa-solid fa-trash-can fa-lg"
-                    onClick={() => handleDelete(post.id)}
-                  ></i>
-                </div>
-              </>
+              <div className="tag--item">
+                <i
+                  className="fa-solid fa-gear fa-lg"
+                  onClick={() => {
+                    navigate(`/posts/update/${post.id}`);
+                  }}
+                ></i>
+              </div>
+            ) : (
+              ""
+            )}
+            {currentUserId === post.rare_user?.user.id || staff ? (
+              <div className="tag--item">
+                <i
+                  className="fa-solid fa-trash-can fa-lg"
+                  onClick={() => handleDelete(post.id)}
+                ></i>
+              </div>
             ) : (
               ""
             )}

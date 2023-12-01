@@ -38,7 +38,11 @@ export const ApplicationViews = ({
             <Route
               path="details/:postId"
               element={
-                <PostDetails token={token} currentUserId={currentUserId} />
+                <PostDetails
+                  token={token}
+                  currentUserId={currentUserId}
+                  staff={staff}
+                />
               }
             />
             <Route
