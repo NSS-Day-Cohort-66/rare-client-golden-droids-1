@@ -21,15 +21,21 @@ export const CommentList = ({ token }) => {
 
   const displayComments = () => {
     if (comments && comments.length) {
-      return comments.map((comment) => (
-        <div className="comment--container mx-5 mb-6 p-4" key={comment.id}>
-          <div className="is-flex is-justify-content-space-between">
-            <div className="comment--item">{comment.author.user.full_name}</div>
-            <div className="comment--item">{comment.created_on}</div>
-          </div>
-          <div className="comment--item">{comment.content}</div>
+      return (
+        <div className="comments--container mt-6 px-5">
+          {comments.map((comment) => (
+            <div className="comment--container mx-5 mb-6 p-4" key={comment.id}>
+              <div className="is-flex is-justify-content-space-between">
+                <div className="comment--item">
+                  {comment.author.user.full_name}
+                </div>
+                <div className="comment--item">{comment.created_on}</div>
+              </div>
+              <div className="comment--item">{comment.content}</div>
+            </div>
+          ))}
         </div>
-      ));
+      );
     }
   };
 
@@ -39,7 +45,7 @@ export const CommentList = ({ token }) => {
         <h2 className="title has-text-centered has-text-white mt-4">
           {post.title}
         </h2>
-        <div className="comments--container mt-6 px-5">{displayComments()}</div>
+        {displayComments()}
       </div>
       <div className="is-flex is-justify-content-center my-5">
         <Link to={`/posts/details/${postId}`}>Back to Post</Link>
