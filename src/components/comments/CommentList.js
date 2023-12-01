@@ -26,13 +26,7 @@ export const CommentList = ({ token, currentUserId, staff }) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to remove this comment?"
     );
-    // if (confirmDelete) {
-    //   deleteComment(token, commentId).then(() => {
-    //     getCommentsByPostId(token, postId).then((commentArr) => {
-    //       setComments(commentArr);
-    //     });
-    //   });
-    // }
+
     if (confirmDelete) {
       deleteComment(token, commentId).then((response) => {
         if (response.status === 403) {
