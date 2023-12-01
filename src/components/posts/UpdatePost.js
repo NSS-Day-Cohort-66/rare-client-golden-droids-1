@@ -136,7 +136,7 @@ export const UpdatePost = ({ token }) => {
             <button
               className="button is-danger is-light"
               onClick={() => {
-                navigate(`/tags/all`);
+                navigate(`/posts/mine`);
               }}
             >
               Cancel
