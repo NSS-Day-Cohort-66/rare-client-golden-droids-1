@@ -66,7 +66,17 @@ export const ApplicationViews = ({
 
           <Route path="comments">
             <Route path="new/:postId" element={<CommentForm token={token} />} />
-            <Route path="all/:postId" element={<CommentList token={token} />} />
+            <Route
+              path="all/:postId"
+              element={
+                // prop drilling currentUserId from Rare.js to be used in CommentList to only display delete button to owner of comment
+                <CommentList
+                  token={token}
+                  currentUserId={currentUserId}
+                  staff={staff}
+                />
+              }
+            />
           </Route>
           <Route path="tags">
             <Route
