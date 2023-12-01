@@ -80,11 +80,11 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
           {post.title}
         </h2>
         <div className="detail--container is-flex is-flex-direction-column m-5 px-6 py-5">
-          {post.image_url ? (
-            <img src={post.image_url} alt="header" className="card-image" />
-          ) : (
-            ""
-          )}
+          <div className="card-image">
+            <figure className="image">
+              {post.image_url ? <img src={post.image_url} alt="header" /> : ""}
+            </figure>
+          </div>
           <div className="is-flex is-justify-content-space-between my-3">
             <div>{post.rare_user?.user.full_name}</div>
             <div className="content">{post.publication_date}</div>

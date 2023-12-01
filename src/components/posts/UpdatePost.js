@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editPost, getPostById } from "../../managers/PostManager";
 import { getAllCategories } from "../../managers/CategoryManager";
+import "./Post.css";
 
 export const UpdatePost = ({ token }) => {
-  const [currentPost, setCurrentPost] = useState({});
+  const [currentPost, setCurrentPost] = useState({ image_url: null });
   const [categories, setCategories] = useState([]);
   const [imageName, setImageName] = useState("");
   const { postId } = useParams();
@@ -37,7 +38,7 @@ export const UpdatePost = ({ token }) => {
         ? currentPost.category.id
         : currentPost.category,
       title: currentPost.title,
-      image_url: null,
+      image_url: currentPost.image_url,
       content: currentPost.content,
     };
 
@@ -106,6 +107,19 @@ export const UpdatePost = ({ token }) => {
             />
           </div>
         </fieldset>
+        <fieldset>
+          {currentPost.image_url ? (
+            <figure className="mb-3">
+              <img
+                src={currentPost.image_url}
+                alt="post-header"
+                className="post--image"
+              />
+            </figure>
+          ) : (
+            ""
+          )}
+        </fieldset>
         <fieldset className="field">
           <div className="file has-name">
             <label className="file-label">
@@ -122,7 +136,7 @@ export const UpdatePost = ({ token }) => {
                 <span className="file-label">Choose a picture...</span>
               </span>
               <span className="file-name">
-                {currentPost.image_url === null ? "No file chosen" : imageName}
+                {imageName === "" ? "No file chosen" : imageName}
               </span>
             </label>
           </div>
