@@ -33,3 +33,14 @@ export const deletePost = (token, postId) => {
     },
   });
 };
+
+export const editPost = (post, postId, token) => {
+  return fetch(`http://localhost:8000/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(post),
+  });
+};

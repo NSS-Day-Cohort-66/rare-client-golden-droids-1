@@ -4,7 +4,7 @@ import { deletePost, getPostById } from "../../managers/PostManager";
 import { getAllTags } from "../../managers/TagManager";
 import { createPostTag } from "../../managers/PostTagManager";
 
-export const PostDetails = ({ token, currentUserId }) => {
+export const PostDetails = ({ token, currentUserId, staff }) => {
   const [post, setPost] = useState({});
   const [tags, setTags] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
@@ -80,7 +80,11 @@ export const PostDetails = ({ token, currentUserId }) => {
           {post.title}
         </h2>
         <div className="detail--container is-flex is-flex-direction-column m-5 px-6 py-5">
-          <img src={post.image_url} alt="header" className="card-image" />
+          {post.image_url ? (
+            <img src={post.image_url} alt="header" className="card-image" />
+          ) : (
+            ""
+          )}
           <div className="is-flex is-justify-content-space-between my-3">
             <div>{post.rare_user?.user.full_name}</div>
             <div className="content">{post.publication_date}</div>
@@ -88,17 +92,24 @@ export const PostDetails = ({ token, currentUserId }) => {
           <div className="content">{post.content}</div>
           <div className="is-flex is-justify-content-end">
             {currentUserId === post.rare_user?.user.id ? (
-              <>
-                <div className="tag--item">
-                  <i className="fa-solid fa-gear fa-lg"></i>
-                </div>
-                <div className="tag--item">
-                  <i
-                    className="fa-solid fa-trash-can fa-lg"
-                    onClick={() => handleDelete(post.id)}
-                  ></i>
-                </div>
-              </>
+              <div className="tag--item">
+                <i
+                  className="fa-solid fa-gear fa-lg"
+                  onClick={() => {
+                    navigate(`/posts/update/${post.id}`);
+                  }}
+                ></i>
+              </div>
+            ) : (
+              ""
+            )}
+            {currentUserId === post.rare_user?.user.id || staff ? (
+              <div className="tag--item">
+                <i
+                  className="fa-solid fa-trash-can fa-lg"
+                  onClick={() => handleDelete(post.id)}
+                ></i>
+              </div>
             ) : (
               ""
             )}

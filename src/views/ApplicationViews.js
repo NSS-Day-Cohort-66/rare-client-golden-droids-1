@@ -13,6 +13,7 @@ import { CommentList } from "../components/comments/CommentList";
 import { UpdateCategory } from "../components/categories/UpdateCategory";
 import { AllPosts } from "../components/posts/AllPosts";
 import { PostDetails } from "../components/posts/PostDetails";
+import { UpdatePost } from "../components/posts/UpdatePost";
 
 export const ApplicationViews = ({
   token,
@@ -37,7 +38,17 @@ export const ApplicationViews = ({
             <Route
               path="details/:postId"
               element={
-                <PostDetails token={token} currentUserId={currentUserId} />
+                <PostDetails
+                  token={token}
+                  currentUserId={currentUserId}
+                  staff={staff}
+                />
+              }
+            />
+            <Route
+              path="update/:postId"
+              element={
+                <UpdatePost token={token} currentUserId={currentUserId} />
               }
             />
           </Route>
@@ -55,7 +66,17 @@ export const ApplicationViews = ({
 
           <Route path="comments">
             <Route path="new/:postId" element={<CommentForm token={token} />} />
-            <Route path="all/:postId" element={<CommentList token={token} />} />
+            <Route
+              path="all/:postId"
+              element={
+                // prop drilling currentUserId from Rare.js to be used in CommentList to only display delete button to owner of comment
+                <CommentList
+                  token={token}
+                  currentUserId={currentUserId}
+                  staff={staff}
+                />
+              }
+            />
           </Route>
           <Route path="tags">
             <Route
