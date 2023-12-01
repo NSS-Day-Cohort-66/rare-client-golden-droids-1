@@ -34,13 +34,10 @@ export const PostForm = ({ token }) => {
       content: newPost.content,
     };
 
-    createPost(post, token)
-      .then((postObj) => {
-        setPostId(postObj["id"]);
-      })
-      .then(() => {
-        navigate(`/posts/details/${newPostId}`);
-      });
+    createPost(post, token).then((postObj) => {
+      navigate(`/posts/details/${postObj["id"]}`);
+      setPostId(postObj["id"]);
+    });
   };
 
   const getBase64 = (file, callback) => {
