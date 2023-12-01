@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import { getPostById } from "../../managers/PostManager";
 import "./Comment.css";
 
-export const CommentList = ({ token }) => {
+export const CommentList = ({ token, currentUserId, staff }) => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
   const { postId } = useParams();
@@ -57,13 +57,19 @@ export const CommentList = ({ token }) => {
             <div className="comment--item">{comment.created_on}</div>
           </div>
           <div className="comment--item">{comment.content}</div>
-          {token && (
-            <button
-              className="delete-comment-button"
-              onClick={() => handleDelete(comment.id)}
-            >
-              Delete
-            </button>
+          {currentUserId === comment.author?.user.id || staff ? (
+            <>
+              <div className="tag--item">
+                <button
+                  className="delete-comment-button"
+                  onClick={() => handleDelete(comment.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </>
+          ) : (
+            ""
           )}
         </div>
       ));
