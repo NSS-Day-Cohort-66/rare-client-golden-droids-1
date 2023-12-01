@@ -124,7 +124,7 @@ export const PostDetails = ({ token, currentUserId, staff }) => {
               ))}
             </ul>
           ) : (
-            <p>No tags associated with this post.</p>
+            <p className="has-text-white">No tags associated with this post.</p>
           )}
         </div>
         <div className="field is-grouped is-grouped-centered mb-3">
