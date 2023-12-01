@@ -6,7 +6,7 @@ import { getAllCategories } from "../../managers/CategoryManager";
 export const UpdatePost = ({ token }) => {
   const [currentPost, setCurrentPost] = useState({});
   const [categories, setCategories] = useState([]);
-  const [ImageString, setImageString] = useState("");
+  const [imageName, setImageName] = useState("");
   const { postId } = useParams();
   const navigate = useNavigate();
 
@@ -23,12 +23,10 @@ export const UpdatePost = ({ token }) => {
   }, []);
 
   const changePostState = (e) => {
-    const { name, value, files } = e.target;
-
-    setCurrentPost((currentPost) => ({
+    setCurrentPost({
       ...currentPost,
-      [name]: name === "image_url" ? files[0] : value,
-    }));
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSave = (e) => {
@@ -58,8 +56,13 @@ export const UpdatePost = ({ token }) => {
     getBase64(event.target.files[0], (base64ImageString) => {
       console.log("Base64 of file is", base64ImageString);
 
-      setImageString(base64ImageString);
+      setCurrentPost({
+        ...currentPost,
+        [event.target.name]: base64ImageString,
+      });
     });
+
+    setImageName(event.target.files[0].name);
   };
 
   return (
@@ -119,16 +122,9 @@ export const UpdatePost = ({ token }) => {
                 <span className="file-label">Choose a picture...</span>
               </span>
               <span className="file-name">
-                {currentPost.image_url === null
-                  ? "No file chosen"
-                  : currentPost.image_url?.name}
+                {currentPost.image_url === null ? "No file chosen" : imageName}
               </span>
             </label>
-            <div className="control">
-              <button onClick={() => {}} className="button is-success">
-                Save
-              </button>
-            </div>
           </div>
         </fieldset>
         <fieldset className="field">
