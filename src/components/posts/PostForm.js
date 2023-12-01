@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createPost, getUserPosts } from "../../managers/PostManager";
+import { createPost } from "../../managers/PostManager";
 import { getAllCategories } from "../../managers/CategoryManager";
 
 export const PostForm = ({ token }) => {
   const [newPost, setNewPost] = useState({ image_url: null });
   const [categories, setCategories] = useState([]);
-  const [newPostId, setPostId] = useState({});
   const [imageName, setImageName] = useState("");
 
   const navigate = useNavigate();
@@ -36,7 +35,6 @@ export const PostForm = ({ token }) => {
 
     createPost(post, token).then((postObj) => {
       navigate(`/posts/details/${postObj["id"]}`);
-      setPostId(postObj["id"]);
     });
   };
 

@@ -37,7 +37,7 @@ export const UpdatePost = ({ token }) => {
         ? currentPost.category.id
         : currentPost.category,
       title: currentPost.title,
-      image_url: null, //currentPost.image_url
+      image_url: null,
       content: currentPost.content,
     };
 
