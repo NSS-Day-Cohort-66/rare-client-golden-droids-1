@@ -55,8 +55,6 @@ export const UpdatePost = ({ token }) => {
 
   const createImageString = (event) => {
     getBase64(event.target.files[0], (base64ImageString) => {
-      console.log("Base64 of file is", base64ImageString);
-
       setCurrentPost({
         ...currentPost,
         [event.target.name]: base64ImageString,
