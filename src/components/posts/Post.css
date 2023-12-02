@@ -23,3 +23,8 @@
   border: 2px dashed black;
   border-radius: 10px;
 }
+
+.post--image {
+  height: 10rem;
+  width: auto;
+}

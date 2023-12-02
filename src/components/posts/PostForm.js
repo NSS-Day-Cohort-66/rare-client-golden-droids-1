@@ -46,8 +46,6 @@ export const PostForm = ({ token }) => {
 
   const createImageString = (event) => {
     getBase64(event.target.files[0], (base64ImageString) => {
-      console.log("Base64 of file is", base64ImageString);
-
       setNewPost({
         ...newPost,
         [event.target.name]: base64ImageString,
@@ -58,7 +56,7 @@ export const PostForm = ({ token }) => {
   };
 
   return (
-    <section className="columns is-centered mt-6">
+    <section className="columns is-centered my-6">
       <form className="column is-two-thirds" onSubmit={handleSave}>
         <h2 className="title">Add New Post</h2>
         <fieldset className="field">
@@ -96,6 +94,19 @@ export const PostForm = ({ token }) => {
             onChange={changePostState}
           />
         </fieldset>
+        <fieldset>
+          {newPost.image_url ? (
+            <figure className="mb-3">
+              <img
+                src={newPost.image_url}
+                alt="post-header"
+                className="post--image"
+              />
+            </figure>
+          ) : (
+            ""
+          )}
+        </fieldset>
         <fieldset className="field">
           <div className="file has-name">
             <label className="file-label">
@@ -112,7 +123,7 @@ export const PostForm = ({ token }) => {
                 <span className="file-label">Choose a picture...</span>
               </span>
               <span className="file-name">
-                {newPost.image_url === null ? "No file chosen" : imageName}
+                {imageName === "" ? "No file chosen" : imageName}
               </span>
             </label>
           </div>
